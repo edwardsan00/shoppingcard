@@ -1,15 +1,11 @@
-const costumers = [
-  {
-    id: 1,
-    firstName: 'Jhon',
-    lastName: 'Cena',
-    email: 'jhoncena@gmail.com'
-  }
-]
+import { Customer } from '../../../datalayer/actuators'
 
 const Query = {
   getCustomer: () => {
-    return costumers
+    return Customer.getCustomers()
+  },
+  getCostumerById: (_, { id }) => {
+    return Customer.getById({id})
   }
 }
 

@@ -1,38 +1,29 @@
-import Sequelize from 'sequelize'
-import sequelize from '../connections/mysql'
+export default (sequelize, DateType) => {
+  const OrderProducts = sequelize.define('orderproducts', {
+    id: {
+      type: DateType.INTEGER,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    orderId: {
+      type: DateType.INTEGER
+    },
+    productId: {
+      type: DateType.INTEGER
+    },
+    quantity: {
+      type: DateType.INTEGER
+    },
+    total: {
+      type: DateType.DECIMAL(10, 2)
+    }
+  })
 
-// import OrdersModel from './order'
-// import ProductsModel from './product'
-
-class OrderProductsModel extends Sequelize.Model { }
-
-OrderProductsModel.init({
-  id: {
-    type: Sequelize.UUID,
-    primaryKey: true,
-    defaultValue: Sequelize.UUIDV4,
-    unique: true,
-    autoIncrement: true
-  },
-  orderId: {
-    type: Sequelize.UUID
-  },
-  productId: {
-    type: Sequelize.UUID
-  },
-  quantity: {
-    type: Sequelize.INTEGER
-  },
-  total: {
-    type: Sequelize.DECIMAL(10, 2)
+  OrderProducts.associate = models => {
+    CartAsProducts.hasMany(models.Carts),
+    CartAsProducts.hasMany(models.Products)
   }
-}, {
-  sequelize,
-  modelName: 'ordersproducts'
-})
 
-// OrderProductsModel.hasMany(ProductsModel, { as: 'ProductsModel', foreignKey: 'productId'})
-// OrderProductsModel.belongsTo(OrdersModel, { as: 'OrdersModel', foreignKey: 'orderId' })
-
-
-export default OrderProductsModel
+  return OrderProducts
+}

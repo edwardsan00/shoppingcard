@@ -1,0 +1,7 @@
+type CartAsProduct {
+  id: ID
+  cartId: Cart
+  productId: Product
+  quantity: Int
+  total: Int
+}

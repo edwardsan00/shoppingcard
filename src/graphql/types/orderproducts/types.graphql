@@ -1,0 +1,7 @@
+type OrderProducts {
+  id: ID
+  orderId: Order
+  productId: Product
+  quantity: Int
+  total: Int
+}

@@ -1,0 +1,10 @@
+enum StatusCart {
+  actived
+  abandoned
+}
+
+type Cart {
+  id: ID
+  customerId: Customer
+  status: StatusCart
+}

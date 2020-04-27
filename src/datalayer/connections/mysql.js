@@ -1,10 +1,16 @@
 import Sequelize from 'sequelize'
 import { connections } from '../config'
+import CustomersModel from '../models/customer'
+import OrdersModel from '../models/order'
+import CartsModel from '../models/cart'
+import CartAsProductsModel from '../models/cartasproducts'
+import ProductsModel from '../models/product'
+import OrderProductsModel from '../models/orderproducts'
 
 const { DATA_BASE, HOST, PASSWORD, USER } = connections.mysql
 
-const sequelize = new Sequelize(DATA_BASE, USER, PASSWORD, {
-  host: HOST,
+export const  sequelize = new Sequelize('shopping_cart', 'root', 'edward123', {
+  host: 'localhost',
   dialect: 'mysql',
   pool: {
     max: 5,
@@ -14,6 +20,15 @@ const sequelize = new Sequelize(DATA_BASE, USER, PASSWORD, {
   }
 })
 
+
+const Customers = CustomersModel(sequelize, Sequelize)
+const Orders = OrdersModel(sequelize, Sequelize)
+const Carts = CartsModel(sequelize, Sequelize)
+const CartAsProducts = CartAsProductsModel(sequelize, Sequelize)
+const Products = ProductsModel(sequelize, Sequelize)
+const OrderProducts = OrderProductsModel(sequelize, Sequelize)
+
+
 sequelize
   .authenticate()
   .then(() => {
@@ -21,14 +36,13 @@ sequelize
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err);
-  });
-
-sequelize.sync({ force: false })
-  .then(() => {
-    console.log('Models created')
-  })
-  .catch(error => {
-    console.log('Failed models created', error)
   })
 
-export default sequelize
+  export {
+    Customers,
+    Orders,
+    Carts,
+    CartAsProducts,
+    Products,
+    OrderProducts
+  }

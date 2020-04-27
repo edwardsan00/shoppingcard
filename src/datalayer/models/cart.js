@@ -1,33 +1,33 @@
-import Sequelize from 'sequelize'
-import sequelize from '../connections/mysql'
+export default (sequelize, DataType) => {
+  const Carts = sequelize.define('carts', {
+    id: {
+      type: DataType.INTEGER,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    customerId: {
+      type: DataType.UUID
+    },
+    status: {
+      type: DataType.ENUM,
+      values: ['actived', 'abandoned']
+    }
+  })
 
-// import CustomersModel from './customer'
-// import CartAsProductsModel from './cartasproducts'
-
-class CartsModel extends Sequelize.Model { }
-
-CartsModel.init({
-  id: {
-    type: Sequelize.UUID,
-    primaryKey: true,
-    defaultValue: Sequelize.UUIDV4,
-    unique: true,
-    autoIncrement: true
-  },
-  customerId: {
-    type: Sequelize.UUID
-  },
-  status: {
-    type: Sequelize.ENUM,
-    values: ['actived', 'abandoned']
+  Carts.associate = models => {
+    Carts.belongsTo(models.Customers, {
+      foreignKey: {
+        allowNull: false
+      }
+    }),
+    Carts.belongsTo(models.Orders, {
+      foreignKey: {
+        allowNull: false
+      }
+    })
   }
-}, {
-  sequelize,
-  modelName: 'carts'
-})
-
-// CartsModel.belongsTo(CustomersModel, { as: 'CustomersModel', foreignKey: 'customerId' })
-// CartsModel.hasOne(CartAsProductsModel, { as: 'CartAsProductsModel', foreignKey: 'cartId' })
 
 
-export default CartsModel
+  return Carts
+}

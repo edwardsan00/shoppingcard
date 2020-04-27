@@ -1,38 +1,31 @@
-import Sequelize from 'sequelize'
-import sequelize from '../connections/mysql'
+export default (sequelize, DataType) => {
+  const Products = sequelize.define('products', {
+    id: {
+      type: DataType.INTEGER,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataType.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataType.TEXT
+    },
+    image: {
+      type: DataType.STRING,
+      validate: {
+        isUrl: true
+      }
+    },
+    price: {
+      type: DataType.DECIMAL(5, 2)
+    },
+    quantity: {
+      type: DataType.INTEGER
+    }
+  })
 
-class ProductsModel extends Sequelize.Model { }
-
-ProductsModel.init({
-  id: {
-    type: Sequelize.UUID,
-    primaryKey: true,
-    defaultValue: Sequelize.UUIDV4,
-    unique: true,
-    autoIncrement: true
-  },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  description: {
-    type: Sequelize.TEXT
-  },
-  image: {
-    type: Sequelize.STRING,
-    validate: {
-      isUrl: true
-    }    
-  },
-  price: {
-    type: Sequelize.DECIMAL(5, 2)
-  },
-  quantity: {
-    type: Sequelize.INTEGER
-  }
-}, {
-  sequelize,
-  modelName: 'products'
-})
-
-export default ProductsModel
+  return Products
+}

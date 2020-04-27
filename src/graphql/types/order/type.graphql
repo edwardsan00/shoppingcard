@@ -1,0 +1,18 @@
+enum PaymentType {
+  visa
+  mastercard
+}
+
+enum StatusOrder {
+  pending
+  complete
+  cancelled
+}
+
+type Order {
+  id: ID
+  customerId: Customer
+  paymentType: PaymentType
+  status: StatusOrder
+  total: Int
+}

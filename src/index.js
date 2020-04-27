@@ -1,7 +1,7 @@
 require('dotenv/config')
-require('./datalayer/connections/mysql')
 import { GraphQLServer } from 'graphql-yoga'
 
+import { sequelize } from './datalayer/connections/mysql'
 import { typeDefs } from './graphql/types'
 import { resolvers } from './graphql/resolvers'
 
@@ -10,6 +10,16 @@ const server = new GraphQLServer({
   resolvers
 })
 
-server.start({ port: process.env.PORT }, ({ port }) => {
-  console.log('Server on port', port)
-})
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Create Models')
+
+    server.start({ port: process.env.PORT }, ({ port }) => {
+      console.log('Server on port', port)
+    })
+  })
+  .catch(error => {
+    console.log('Failed models created', error)
+  })
+
+

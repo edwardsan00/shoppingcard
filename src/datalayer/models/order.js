@@ -1,39 +1,35 @@
-import Sequelize from 'sequelize'
-import sequelize from '../connections/mysql'
+export default (sequelize, DataType) => {
+  const Orders = sequelize.define('orders', {
+    id: {
+      type: DataType.INTEGER,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    customerId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+    },
+    paymentType: {
+      type: DataType.ENUM,
+      values: ['visa', 'mastercard']
+    },
+    status: {
+      type: DataType.ENUM,
+      values: ['pending', 'complete', 'cancelled']
+    },
+    total: {
+      type: DataType.DECIMAL(10, 2)
+    }
+  })
 
-// import CustomerModel from './customer'
-// import OrderProducts from './orderproducts'
-
-class OrdersModel extends Sequelize.Model { }
-
-OrdersModel.init({
-  id: {
-    type: Sequelize.UUID,
-    primaryKey: true,
-    defaultValue: Sequelize.UUIDV4,
-    unique: true,
-    autoIncrement: true
-  },
-  customerId: {
-    type: Sequelize.UUID
-  },
-  paymentType: {
-    type: Sequelize.ENUM,
-    values: ['visa', 'mastercard']
-  },
-  status: {
-    type: Sequelize.ENUM,
-    values: ['pending', 'complete', 'cancelled']
-  },
-  total: {
-    type: Sequelize.DECIMAL(10, 2)
+  Orders.associate = models => {
+    Orders.belongsTo(models.Customers, { 
+      foreignKey: {
+        allowNull: false
+      }
+     })
   }
-}, {
-  sequelize,
-  modelName: 'orders'
-})
 
-// OrdersModel.belongsTo(CustomerModel, { as: 'CustomerModel', foreignKey: 'customerId' })
-// OrdersModel.hasOne(OrderProducts, { as: 'OrderProducts', foreignKey: 'orderId' })
-
-export default OrdersModel
+  return Orders
+}

@@ -1,6 +1,16 @@
+scalar Date 
+
 type Customer {
   id: ID
   firstName: String
   lastName: String
   email: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+input CustomerInput {
+  firstName: String!
+  lastName: String
+  email: String!
 }
