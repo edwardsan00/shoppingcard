@@ -1,5 +1,5 @@
 require('dotenv/config')
-
+require('./datalayer/connections/mysql')
 import { GraphQLServer } from 'graphql-yoga'
 
 import { typeDefs } from './graphql/types'
