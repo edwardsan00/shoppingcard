@@ -1,0 +1,3 @@
+type Query {
+  getCartAsProducts(cartId: String!): [CartAsProduct]
+}
