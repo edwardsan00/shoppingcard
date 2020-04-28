@@ -12,14 +12,17 @@ export default (sequelize, DataType) => {
     },
     paymentType: {
       type: DataType.ENUM,
-      values: ['visa', 'mastercard']
+      values: ['visa', 'mastercard'],
+      allowNull: false
     },
     status: {
       type: DataType.ENUM,
-      values: ['pending', 'complete', 'cancelled']
+      values: ['pending', 'complete', 'cancelled'],
+      defaultValue: 'pending'
     },
     total: {
-      type: DataType.DECIMAL(10, 2)
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false
     }
   })
 

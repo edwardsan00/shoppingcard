@@ -1,4 +1,0 @@
-type Query {
-  getCustomer: [Customer]
-  getCostumerById(id: String!): Customer
-}

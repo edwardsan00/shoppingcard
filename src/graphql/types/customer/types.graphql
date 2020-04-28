@@ -9,6 +9,11 @@ type Customer {
   updatedAt: Date
 }
 
+type CustomerAndCart {
+  customer: Customer
+  productsInCart: [CartAsProduct]!
+}
+
 input CustomerInput {
   firstName: String!
   lastName: String

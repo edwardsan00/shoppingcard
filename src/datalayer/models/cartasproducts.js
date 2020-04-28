@@ -7,16 +7,19 @@ export default (sequelize, DataType) => {
       autoIncrement: true
     },
     cartId: {
-      type: DataType.UUID
+      type: DataType.INTEGER,
+      allowNull: false
     },
     productId: {
-      type: DataType.UUID
-    },
-    quantity: {
       type: DataType.INTEGER
     },
+    quantity: {
+      type: DataType.INTEGER,
+      allowNull: false
+    },
     total: {
-      type: DataType.DECIMAL(10, 2)
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false
     }
   })
 

@@ -1,0 +1,5 @@
+type Mutation {
+  addCart(addCart: AddCartInput!): CartAsProduct
+  deleteProduct(id: String!): Success
+  updateProduct(id: String!, addCart: AddCartInput!): CartAsProduct
+}

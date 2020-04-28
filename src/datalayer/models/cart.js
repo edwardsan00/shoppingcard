@@ -7,11 +7,13 @@ export default (sequelize, DataType) => {
       autoIncrement: true
     },
     customerId: {
-      type: DataType.UUID
+      type: DataType.INTEGER,
+      allowNull: false
     },
     status: {
       type: DataType.ENUM,
-      values: ['actived', 'abandoned']
+      values: ['actived', 'abandoned'],
+      defaultValue: 'actived'
     }
   })
 

@@ -16,3 +16,10 @@ type Order {
   status: StatusOrder
   total: Int
 }
+
+input OrderInput {
+  customerId: String!
+  paymentType: PaymentType!
+  status: StatusOrder!
+  total: Int!
+}

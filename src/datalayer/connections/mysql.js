@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
 import { connections } from '../config'
+console.log("===> Edward <===: connections", connections)
 import CustomersModel from '../models/customer'
 import OrdersModel from '../models/order'
 import CartsModel from '../models/cart'
@@ -9,8 +10,8 @@ import OrderProductsModel from '../models/orderproducts'
 
 const { DATA_BASE, HOST, PASSWORD, USER } = connections.mysql
 
-export const  sequelize = new Sequelize('shopping_cart', 'root', 'edward123', {
-  host: 'localhost',
+export const sequelize = new Sequelize(DATA_BASE, USER, PASSWORD, {
+  host: HOST,
   dialect: 'mysql',
   pool: {
     max: 5,
