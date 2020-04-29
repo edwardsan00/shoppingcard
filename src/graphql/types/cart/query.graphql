@@ -1,3 +1,4 @@
 type Query {
   getCartById(id: String!): Cart
+  getCartByCustomerId(id: String!): Cart
 }
