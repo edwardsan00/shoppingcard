@@ -1,4 +1,4 @@
 type Query {
   getCustomer: [Customer]
-  getCostumerById(id: String!): CustomerAndCart
+  getCustumerById(id: String!): CustomerAndCart
 }

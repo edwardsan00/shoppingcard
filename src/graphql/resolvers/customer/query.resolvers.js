@@ -4,7 +4,7 @@ const Query = {
   getCustomer: () => {
     return Customer.getCustomers()
   },
-  getCostumerById: (_, { id }) => {
+  getCustumerById: (_, { id }) => {
     return Customer.getById({id})
   }
 }

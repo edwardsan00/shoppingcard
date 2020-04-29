@@ -10,6 +10,16 @@ const server = new GraphQLServer({
   resolvers
 })
 
+// const options = {
+//   port: process.env.PORT,
+//   endpoint: '/graphql',
+//   cors: {
+//     credentials: true,
+//     origin: ["http://localhost:3000"]
+//   }
+// }
+
+
 sequelize.sync({ force: false })
   .then(() => {
     console.log('Create Models')
